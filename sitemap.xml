@@ -3,33 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/posts/consistent-runtime-for-terraform-with-docker-and-make/</loc>
+    <loc>https://www.ribbybibby.me/posts/consistent-runtime-for-terraform-with-docker-and-make/</loc>
     <lastmod>2019-05-02T18:18:51+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/</loc>
-    <lastmod>2019-05-02T18:18:51+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
+    <loc>https://www.ribbybibby.me/posts/</loc>
     <lastmod>2019-05-02T18:18:51+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>https://www.ribbybibby.me/</loc>
+    <lastmod>2019-05-02T18:18:51+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/about/</loc>
+    <loc>https://www.ribbybibby.me/categories/</loc>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>https://www.ribbybibby.me/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.ribbybibby.me/tags/</loc>
     <priority>0</priority>
   </url>
   
