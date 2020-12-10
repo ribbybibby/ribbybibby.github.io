@@ -1,6 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://www.ribbybibby.me/posts/multiple-yaml-documents/</loc>
+    <lastmod>2020-12-10T18:03:51+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.ribbybibby.me/posts/</loc>
+    <lastmod>2020-12-10T18:03:51+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.ribbybibby.me/</loc>
+    <lastmod>2020-12-10T18:03:51+01:00</lastmod>
+  </url>
   
   <url>
     <loc>https://www.ribbybibby.me/posts/consistent-runtime-for-terraform-with-docker-and-make/</loc>
@@ -8,29 +23,15 @@
   </url>
   
   <url>
-    <loc>https://www.ribbybibby.me/posts/</loc>
-    <lastmod>2019-05-02T18:18:51+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.ribbybibby.me/</loc>
-    <lastmod>2019-05-02T18:18:51+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.ribbybibby.me/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://www.ribbybibby.me/about/</loc>
   </url>
   
   <url>
+    <loc>https://www.ribbybibby.me/categories/</loc>
+  </url>
+  
+  <url>
     <loc>https://www.ribbybibby.me/tags/</loc>
-    <priority>0</priority>
   </url>
   
 </urlset>
