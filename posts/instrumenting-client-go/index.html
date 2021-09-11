@@ -8,16 +8,17 @@
 	
 	
 	
-	<title>Posts ｜ ROB BEST</title>
+	<title>Instrumenting k8s.io/client-go with metrics ｜ ROB BEST</title>
 	
     
+    
+    <meta name="description" content="The Kubernetes client-go package provides a really handy set of interfaces for instrumenting its REST client and workqueue packages.
+This is something that I didn&amp;rsquo;t find highlighted or documented anywhere but I was sure must exist when I found myself thinking about the best way to implement metrics for my Kubernetes controllers." />
     
 
     
 
 	
-	<link rel="alternate" type="application/rss+xml" href="https://www.ribbybibby.me/posts/index.xml" title="ROB BEST" />
-    
     
     <link rel="shortcut icon" href="https://www.ribbybibby.me/images/favicon.ico" />
 
@@ -79,49 +80,37 @@
     </div>
 </div>
         <div class="content">
-            <div class="list_with_title">
-                
-                <div class="listing_title">2021</div>
-                <div class="listing">
-                    
-                    <div class="listing_item">
-                        <div class="listing_post">
-                            <a href="/posts/instrumenting-client-go/">Instrumenting k8s.io/client-go with metrics</a>
-                            <div class="post_time"><span class="date">09-11</span></div>
-                        </div>
+            <div class="post_page">
+                <div class="post animate__animated animate__fadeInDown">
+                    <div class="post_title post_detail_title">
+                        <h2><a href='/posts/instrumenting-client-go/'>Instrumenting k8s.io/client-go with metrics</a></h2>
+                        <span class="date">2021.09.11</span>
                     </div>
-                    
+                    <div class="post_content markdown"><p>The Kubernetes <a href="https://pkg.go.dev/k8s.io/client-go">client-go</a> package provides
+a really handy set of interfaces for instrumenting its <a href="https://pkg.go.dev/k8s.io/client-go/tools/metrics">REST
+client</a> and
+<a href="https://pkg.go.dev/k8s.io/client-go/util/workqueue#MetricsProvider">workqueue</a>
+packages.</p>
+<p>This is something that I didn&rsquo;t find highlighted or documented anywhere but I
+was sure must exist when I found myself thinking about the best way to implement
+metrics for my Kubernetes controllers.</p>
+<p>It provides a very flexible and straightforward way to produce useful and
+meaningful metrics without having to reinvent the wheel.</p>
+<p><a href="https://github.com/prometheus/prometheus/blob/v2.29.2/discovery/kubernetes/client_metrics.go">The Kubernetes discovery code in Prometheus has a great example of using
+both.</a></p>
+</div>
+                    <div class="post_footer">
+                        
+                    </div>
                 </div>
                 
-                <div class="listing_title">2020</div>
-                <div class="listing">
-                    
-                    <div class="listing_item">
-                        <div class="listing_post">
-                            <a href="/posts/multiple-yaml-documents/">HOW TO: Unmarshal multiple yaml documents in Go</a>
-                            <div class="post_time"><span class="date">12-10</span></div>
-                        </div>
-                    </div>
-                    
-                </div>
                 
-                <div class="listing_title">2019</div>
-                <div class="listing">
-                    
-                    <div class="listing_item">
-                        <div class="listing_post">
-                            <a href="/posts/consistent-runtime-for-terraform-with-docker-and-make/">HOW TO: Create a consistent runtime for Terraform with Docker and make</a>
-                            <div class="post_time"><span class="date">05-02</span></div>
-                        </div>
-                    </div>
-                    
-                </div>
+                <div class="doc_comments"></div>
                 
             </div>
-            <div class="pagination"></div>
         </div>
-        <a id="back_to_top" href="#" class="back_to_top"><i class="ri-arrow-up-s-line"></i></a>
     </div>
+    <a id="back_to_top" href="#" class="back_to_top"><i class="ri-arrow-up-s-line"></i></a>
     <footer class="footer">
     <div class="powered_by">
         <a href="https://varkai.com">Designed by VarKai,</a>

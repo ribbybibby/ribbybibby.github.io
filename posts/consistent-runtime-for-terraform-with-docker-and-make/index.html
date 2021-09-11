@@ -95,7 +95,7 @@ For instance, how do you make sure everyone is running the same version of Terra
 </ul>
 <h3 id="repository-structure">Repository structure</h3>
 <p>For the purposes of this post, let’s assume your Terraform code is all versioned in one repository with a structure similar to this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.
 ├── README.md
 └── terraform
     ├── project1
@@ -117,7 +117,7 @@ For instance, how do you make sure everyone is running the same version of Terra
 </code></pre></div><p>There’s a folder for each project in your organization under <code>./terraform/</code> containing <code>.tf</code> files and a <code>.tfvars</code> file for each environment. This is my preferred way to partition my Terraform code, but if yours is different it doesn&rsquo;t make much difference in the context of this guide.</p>
 <h3 id="dockerfile">Dockerfile</h3>
 <p>The first thing I&rsquo;m going to add is a <code>Dockerfile</code> to the root of the repository:</p>
-<div class="highlight"><pre class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">FROM</span><span class="s"> alpine:3.8</span><span class="err">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">FROM</span><span class="s"> alpine:3.8</span><span class="err">
 </span><span class="err">
 </span><span class="err"></span><span class="k">ENV</span> <span class="nv">TERRAFORM_VERSION</span><span class="o">=</span><span class="m">0</span>.11.13<span class="err">
 </span><span class="err"></span><span class="k">ENV</span> <span class="nv">AWSCLI_VERSION</span><span class="o">=</span><span class="m">1</span>.14.10<span class="err">
@@ -138,7 +138,7 @@ For instance, how do you make sure everyone is running the same version of Terra
 <p>You might have noticed that I didn’t copy the contents of my <code>./terraform</code> directory into the Docker image. That&rsquo;s because I&rsquo;m going to mount it instead so that I can make changes to the files on my local filesystem but then apply them from within the running Docker container.</p>
 <p>If you were including this repo inside a CI/CD pipeline, you might choose to copy the dir in to provide you with a versioned artifact. On the other hand, in that situation I think there&rsquo;s still something to be said for versioning your terraform code and what is essentially your terraform binary separately. More on that later.</p>
 <p>I create <code>docker-compose.yml</code> next to my <code>Dockerfile</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="w">
 </span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
 </span><span class="w">  </span><span class="nt">terraform</span><span class="p">:</span><span class="w">
 </span><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">.</span><span class="w">
@@ -151,7 +151,7 @@ For instance, how do you make sure everyone is running the same version of Terra
 </span><span class="w">      </span>- <span class="l">~/.aws:/root/.aws</span><span class="w">
 </span></code></pre></div><p>Under volumes you can see I bind the <code>./terraform</code> directory to <code>/terraform</code> on the container. I also mount the <code>~/.aws</code> directory and set the <code>AWS_DEFAULT_REGION</code> environment variable so that the AWS credentials of the user will be available and the resources in the right region will be targeted (this is all assuming your Terraform code uses AWS resources, of course).</p>
 <p>The <code>tty</code> and <code>stdin_open</code> bools set to <code>true</code> ensure than when I eventually run the container, I get an interactive bash shell and I can cd to one of my project directories, see all the code and run Terraform if I wish.</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">$ docker-compose run terraform
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ docker-compose run terraform
 bash-4.4# cd project1
 bash-4.4# ls 
 main.tf  outputs.tf  variables.tf  vars
@@ -161,7 +161,7 @@ bash-4.4# terraform init
 Initializing the backend..
 </code></pre></div><h2 id="makefile">Makefile</h2>
 <p>This <code>Makefile</code> wraps around the plan and apply commands, making sure they&rsquo;re ran in a consistent fashion.</p>
-<div class="highlight"><pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nv">ENVIRONMENT</span> <span class="o">:=</span> dev
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nv">ENVIRONMENT</span> <span class="o">:=</span> dev
 <span class="nv">PROJECT</span> <span class="o">:=</span> <span class="k">$(</span>notdir <span class="k">$(</span>shell <span class="nb">pwd</span><span class="k">))</span>
 <span class="nv">TF_BUCKET</span> <span class="o">:=</span> org-tfstate-<span class="si">${</span><span class="nv">ENVIRONMENT</span><span class="si">}</span>
 
@@ -189,15 +189,15 @@ Initializing the backend..
 	@terraform apply ./plan.tfout
 	@-rm -f ./plan.tfout
 </code></pre></div><p>By default the <code>Makefile</code> targets the dev environment. This can be overriden by supplying the <code>ENVIRONMENT</code> variable when <code>make</code> is ran:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">$ docker-compose run terraform
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ docker-compose run terraform
 bash-4.4# cd project1
 bash-4.4# make plan ENVIRONMENT=prod
 </code></pre></div><p>Additionally, if you want to append extra arguments to <code>plan</code> you can do so with <code>ARGS</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">bash-4.4# make plan ARGS=&#34;-target=aws_s3_bucket.example&#34;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">bash-4.4# make plan ARGS=&#34;-target=aws_s3_bucket.example&#34;
 </code></pre></div><p>You can place the <code>Makefile</code> inside each project directory, alongside the <code>.tf</code> files. Or, what I prefer to do is to put it at the root of the repository as <code>common.makefile</code> and refer back to it with an <code>include</code> statement in a <code>Makefile</code> in each project. This avoids unnecessary duplication:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">include ../../common.makefile
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">include ../../common.makefile
 </code></pre></div><p>The structure now looks like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.
 ├── common.makefile
 ├── docker-compose.yml
 ├── Dockerfile
@@ -225,7 +225,7 @@ bash-4.4# make plan ENVIRONMENT=prod
 <p>This guide has assumed, so far, that individual team members are running Terraform to update infrastructure. However, when your Terraform deployment reaches a certain level of sophistication or your team reaches a size where it&rsquo;s becoming hard to keep track of which changes have been deployed to which environment, you might start to consider running Terraform with a CI/CD solution.</p>
 <p>There are numerous ways to implement this but my recommendation would be to separate the Dockerfile into it&rsquo;s own repository and version it separately to your Terraform code.</p>
 <p>Then, as part of your pipeline&rsquo;s deployment phase, you could run something like the following from within a project root module:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">$ docker run --rm -it -v .:/terraform -e AWS_PROFILE=$AWS_PROFILE myorg/terraform:v0.0.4 make plan
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ docker run --rm -it -v .:/terraform -e AWS_PROFILE=$AWS_PROFILE myorg/terraform:v0.0.4 make plan
 $ docker run --rm -it -v .:/terraform -e AWS_PROFILE=$AWS_PROFILE myorg/terraform:v0.0.4 make apply
 </code></pre></div><p>This mounts the project dir in the container and runs <code>plan</code> and <code>apply</code>. It also passes the <code>AWS_PROFILE</code> environment variable from your CI environment to the container. There&rsquo;s obviously endless bespoke configuration you could add here.</p>
 <h2 id="conclusion">Conclusion</h2>

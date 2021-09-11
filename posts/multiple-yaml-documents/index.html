@@ -100,7 +100,7 @@ in this small post I&rsquo;ll demonstrate how.</p>
 <p>Let&rsquo;s say I run a surprisingly tech savvy cafe that accepts orders for breakfast
 in yaml format. A collection of orders can be provided in the form of multiple
 yaml documents:</p>
-<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">var</span> <span class="nx">data</span> <span class="p">=</span> <span class="s">`
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">var</span> <span class="nx">data</span> <span class="p">=</span> <span class="s">`
 </span><span class="s">person: john
 </span><span class="s">items:
 </span><span class="s">  - name: sausage
@@ -123,7 +123,7 @@ yaml documents:</p>
 </span><span class="s">`</span>
 </code></pre></div><p>Yes, I know this is an odd example.</p>
 <p>As with any single yaml document in Go, I can represent it with a type:</p>
-<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">type</span> <span class="nx">BreakfastOrder</span> <span class="kd">struct</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">type</span> <span class="nx">BreakfastOrder</span> <span class="kd">struct</span> <span class="p">{</span>
 	<span class="nx">Person</span> <span class="kt">string</span> <span class="s">`yaml:&#34;person&#34;`</span>
 	<span class="nx">Items</span>  <span class="p">[]</span><span class="kd">struct</span> <span class="p">{</span>
 		<span class="nx">Name</span>     <span class="kt">string</span> <span class="s">`yaml:&#34;name&#34;`</span>
@@ -135,7 +135,7 @@ yaml data into an instance of this type. However, because <code>yaml.Unmarshal</
 doesn&rsquo;t support multiple documents, you need to write a bit more code.</p>
 <p>Here&rsquo;s a function that will iterate over multiple documents and decode them into a
 <code>[]BreakfastOrder</code> slice:</p>
-<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">UnmarshalAllBreakfastOrders</span><span class="p">(</span><span class="nx">in</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">,</span> <span class="nx">out</span> <span class="o">*</span><span class="p">[]</span><span class="nx">BreakfastOrder</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">UnmarshalAllBreakfastOrders</span><span class="p">(</span><span class="nx">in</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">,</span> <span class="nx">out</span> <span class="o">*</span><span class="p">[]</span><span class="nx">BreakfastOrder</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
 	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">bytes</span><span class="p">.</span><span class="nf">NewReader</span><span class="p">(</span><span class="nx">in</span><span class="p">)</span>
 	<span class="nx">decoder</span> <span class="o">:=</span> <span class="nx">yaml</span><span class="p">.</span><span class="nf">NewDecoder</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
 	<span class="k">for</span> <span class="p">{</span>
@@ -152,7 +152,7 @@ doesn&rsquo;t support multiple documents, you need to write a bit more code.</p>
 	<span class="k">return</span> <span class="kc">nil</span>
 <span class="p">}</span>
 </code></pre></div><p>Now I can do this in my main function:</p>
-<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
 	<span class="nx">orders</span> <span class="o">:=</span> <span class="p">[]</span><span class="nx">BreakfastOrder</span><span class="p">{}</span>
 	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">UnmarshalAllBreakfastOrders</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span> <span class="o">&amp;</span><span class="nx">orders</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
 		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
@@ -163,11 +163,11 @@ doesn&rsquo;t support multiple documents, you need to write a bit more code.</p>
 	<span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><p>And get what I want:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">john wants: [{sausage 2} {egg 1} {bacon 2}]
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">john wants: [{sausage 2} {egg 1} {bacon 2}]
 tina wants: [{sausage 1} {egg 2} {bacon 2} {toast 1}]
 </code></pre></div><h2 id="full-example">Full Example</h2>
 <p><a href="https://play.golang.org/p/YAavt2Gw_jw">Try it on The Go Playground</a></p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
 	<span class="s">&#34;bytes&#34;</span>

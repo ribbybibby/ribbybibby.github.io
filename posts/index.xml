@@ -6,7 +6,17 @@
     <description>Recent content in Posts on ROB BEST</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 10 Dec 2020 18:03:51 +0100</lastBuildDate><atom:link href="https://www.ribbybibby.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Sep 2021 11:00:51 +0100</lastBuildDate><atom:link href="https://www.ribbybibby.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Instrumenting k8s.io/client-go with metrics</title>
+      <link>https://www.ribbybibby.me/posts/instrumenting-client-go/</link>
+      <pubDate>Sat, 11 Sep 2021 11:00:51 +0100</pubDate>
+      
+      <guid>https://www.ribbybibby.me/posts/instrumenting-client-go/</guid>
+      <description>The Kubernetes client-go package provides a really handy set of interfaces for instrumenting its REST client and workqueue packages.
+This is something that I didn&amp;rsquo;t find highlighted or documented anywhere but I was sure must exist when I found myself thinking about the best way to implement metrics for my Kubernetes controllers.</description>
+    </item>
+    
     <item>
       <title>HOW TO: Unmarshal multiple yaml documents in Go</title>
       <link>https://www.ribbybibby.me/posts/multiple-yaml-documents/</link>
